@@ -1,22 +1,16 @@
-import { useState, useEffect } from "react";
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import RecipeDetail from "./pages/RecipeDetail";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/hello/")
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>{message}</p>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipes/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
